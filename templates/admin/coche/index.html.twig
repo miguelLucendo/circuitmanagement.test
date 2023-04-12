@@ -1,0 +1,50 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Coche index
+{% endblock %}
+
+
+
+{% block content %}
+	<div class="container mx-auto mt-8">
+		<h1 class="text-2xl font-bold mb-4">Coches</h1>
+
+		<table class="table-auto w-full mb-8">
+			<thead>
+				<tr class="bg-gray-200">
+					<th class="px-4 py-2">#</th>
+					<th class="px-4 py-2">Marca</th>
+					<th class="px-4 py-2">Modelo</th>
+					<th class="px-4 py-2">Color</th>
+					<th class="px-4 py-2">CV</th>
+					<th class="px-4 py-2">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for coche in coches %}
+					<tr class="{{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
+						<td class="border px-4 py-2">{{ coche.id }}</td>
+						<td class="border px-4 py-2">{{ coche.marca }}</td>
+						<td class="border px-4 py-2">{{ coche.modelo }}</td>
+						<td class="border px-4 py-2">{{ coche.color }}</td>
+						<td class="border px-4 py-2">{{ coche.cv }}</td>
+						<td class="border px-4 py-2 flex justify-end gap-2">
+							<a href="{{ path('app_coche_show', {'id': coche.id}) }}" class="text-blue-500 hover:text-blue-700 mr-2"><i class="fa-solid fa-magnifying-glass"></i></a>
+							<a href="{{ path('app_coche_edit', {'id': coche.id}) }}" class="text-blue-500 hover:text-blue-700"><i class="fa-solid fa-pen-to-square"></i></a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="6" class="border px-4 py-2 text-center">
+							<i class="fa-solid fa-xmark"></i>
+							No se encontraron registros
+							<i class="fa-solid fa-xmark"></i>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_coche_new') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Insertar coche</a>
+	</div>
+{% endblock %}

@@ -73,6 +73,11 @@ Encore
     //.autoProvidejQuery()
     // Tailwind CSS
     .enablePostCssLoader()
+    // Font awesome
+    // .copyFiles({
+    //     from: './node_modules/@fortawesome/fontawesome-free/webfonts',
+    //     to: 'fonts/[name].[ext]'
+    // })
 ;
 
 module.exports = Encore.getWebpackConfig();

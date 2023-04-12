@@ -11,4 +11,6 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 
+// Font awesome
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
