@@ -1,11 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}New Coche{% endblock %}
+{% block title %}Nuevo coche{% endblock %}
 
-{% block body %}
-    <h1>Create new Coche</h1>
+{% block content %}
+	<div class="w-full overflow-hidden flex flex-col flex-wrap px-4 py-8 gap-12">
+		<h1 class="text-3xl font-semibold dark:text-white">Introducir un nuevo coche</h1>
 
-    {{ include('admin/coche/_form.html.twig') }}
 
-    <a href="{{ path('app_coche_index') }}">back to list</a>
+		{{ include('admin/coche/_form.html.twig') }}
+
+		<a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-44 text-center duration-300" href="{{ path('app_coche_index') }}">Volver a la lista</a>
+	</div>
 {% endblock %}

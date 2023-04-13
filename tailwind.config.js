@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'roboto': ['Roboto', 'sans-serif'],
+    },
     screens: {
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
@@ -21,7 +24,7 @@ module.exports = {
 
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
-    }
+    },
   },
   plugins: [],
 }

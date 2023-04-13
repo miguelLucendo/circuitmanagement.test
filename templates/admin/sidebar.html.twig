@@ -1,25 +1,25 @@
-<div class="flex flex-col top-0 left-0 w-2/12 md:w-3/12 bg-white h-full border-r">
-	<div class="flex items-center justify-center h-16 border-b">
-		<span class="font-bold text-gray-800 hidden md:block">Circuit Management</span>
-		<i class="fa-solid fa-flag-checkered fa-2x block md:hidden"></i>
+<div class="flex flex-col top-0 left-0 w-2/12 md:w-3/12 bg-white dark:bg-slate-800 h-full border-r-2 dark:border-slate-950">
+	<div class="flex items-center justify-center h-16 border-b dark:border-slate-950">
+		<span class="font-bold text-gray-800 hidden md:block dark:text-white">Circuit Management</span>
+		<i class="fa-solid fa-flag-checkered fa-2x block md:hidden dark:text-white"></i>
 	</div>
 	<!-- Opciones del menú -->
 	<nav class="flex-grow overflow-y-auto mt-5">
-		<a href="{{ url('admin_page') }}" class="flex items-center justify-center md:justify-start px-6 py-2 text-gray-700 hover:text-gray-800 hover:bg-gray-100 {{ app.request.uri != url('admin_page') ?: 'border-l-4 border-indigo-500 bg-gray-100' }}">
-			<i class="fas fa-tachometer-alt mr-3 fa-2x"></i>
-			<span class="font-medium hidden md:block">Dashboard</span>
+		<a href="{{ url('admin_page') }}" class="flex items-center justify-center md:justify-start px-6 py-2 text-gray-700 hover:text-gray-800 hover:bg-gray-100 dark:hover:bg-slate-900 {{ app.request.uri != url('admin_page') ?: 'border-l-4 border-indigo-500 bg-gray-100 dark:bg-slate-900' }}">
+			<i class="fas fa-tachometer-alt mr-3 fa-2x dark:text-white"></i>
+			<span class="font-medium hidden md:block dark:text-white">Dashboard</span>
 		</a>
-		<a href="#" class="flex items-center justify-center md:justify-start px-6 py-2 mt-2 text-gray-700 hover:bg-gray-100 hover:text-gray-800">
-			<i class="fa-solid fa-user mr-3 fa-2x"></i>
-			<span class="font-medium hidden md:block">Usuarios</span>
+		<a href="#" class="flex items-center justify-center md:justify-start px-6 py-2 mt-2 text-gray-700 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-slate-900">
+			<i class="fa-solid fa-user mr-3 fa-2x dark:text-white"></i>
+			<span class="font-medium hidden md:block dark:text-white">Usuarios</span>
 		</a>
-		<a href="{{url('app_coche_index')}}" class="flex items-center justify-center md:justify-start px-6 py-2 mt-2 text-gray-700 hover:bg-gray-100 hover:text-gray-800 {{ app.request.uri != url('app_coche_index') ?: 'border-l-4 border-indigo-500 bg-gray-100' }}">
-			<i class="fa-solid fa-car mr-3 fa-2x"></i>
-			<span class="font-medium hidden md:block">Coches</span>
+		<a href="{{url('app_coche_index')}}" class="flex items-center justify-center md:justify-start px-6 py-2 mt-2 text-gray-700 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-slate-900 {{ app.request.uri != url('app_coche_index') ?: 'border-l-4 border-indigo-500 bg-gray-100 dark:bg-slate-900' }}">
+			<i class="fa-solid fa-car mr-3 fa-2x dark:text-white"></i>
+			<span class="font-medium hidden md:block dark:text-white">Coches</span>
 		</a>
-		<a href="#" class="flex items-center justify-center md:justify-start px-6 py-2 mt-2 text-gray-700 hover:bg-gray-100 hover:text-gray-800">
-			<i class="fa-solid fa-gear mr-3 fa-2x"></i>
-			<span class="font-medium hidden md:block">Configuración</span>
+		<a href="#" class="flex items-center justify-center md:justify-start px-6 py-2 mt-2 text-gray-700 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-slate-900">
+			<i class="fa-solid fa-gear mr-3 fa-2x dark:text-white"></i>
+			<span class="font-medium hidden md:block dark:text-white">Configuración</span>
 		</a>
 	</nav>
 </div>
