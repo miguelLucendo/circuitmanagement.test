@@ -6,6 +6,10 @@
 <div class="w-full overflow-hidden rounded-lg border border-gray-200 shadow-lg bg-gray-50 px-4 py-8 flex flex-col">
 	{{ form_start(form) }}
 	<div class="flex flex-col gap-2 p-4">
+		{{ form_label(form.matricula, 'Matrícula') }}
+		{{ form_widget(form.matricula, {'attr': {'class': 'rounded border border-gray-300 p-2'}}) }}
+	</div>
+	<div class="flex flex-col gap-2 p-4">
 		{{ form_label(form.marca, 'Marca') }}
 		{{ form_widget(form.marca, {'attr': {'class': 'rounded border border-gray-300 p-2'}}) }}
 	</div>

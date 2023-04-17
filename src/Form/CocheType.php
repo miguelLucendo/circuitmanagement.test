@@ -12,6 +12,7 @@ class CocheType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('matricula')    
             ->add('marca')
             ->add('modelo')
             ->add('color')

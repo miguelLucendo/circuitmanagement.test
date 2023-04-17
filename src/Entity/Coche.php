@@ -6,14 +6,19 @@ use App\Repository\CocheRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CocheRepository::class)]
+#[UniqueEntity(fields: ['matricula'], message: 'Ya existe un coche con esta matrícula')]
 class Coche
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $matricula = null;
 
     #[ORM\Column(length: 255)]
     private ?string $marca = null;
@@ -32,6 +37,7 @@ class Coche
 
     #[ORM\ManyToOne(inversedBy: 'coches')]
     private ?Usuario $usuario = null;
+
 
     public function __construct()
     {
@@ -129,6 +135,18 @@ class Coche
     public function setUsuario(?Usuario $usuario): self
     {
         $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    public function getMatricula(): ?string
+    {
+        return $this->matricula;
+    }
+
+    public function setMatricula(string $matricula): self
+    {
+        $this->matricula = $matricula;
 
         return $this;
     }

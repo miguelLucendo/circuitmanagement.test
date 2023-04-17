@@ -34,7 +34,7 @@ class CocheController extends AbstractController
             return $this->redirectToRoute('app_coche_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/coche/new.html.twig', [
+        return $this->render('admin/coche/new.html.twig', [
             'coche' => $coche,
             'form' => $form,
         ]);
@@ -60,7 +60,7 @@ class CocheController extends AbstractController
             return $this->redirectToRoute('app_coche_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/coche/edit.html.twig', [
+        return $this->render('admin/coche/edit.html.twig', [
             'coche' => $coche,
             'form' => $form,
         ]);
