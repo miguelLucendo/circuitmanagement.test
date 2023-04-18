@@ -1,37 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Registro{% endblock %}
+{% block title %}Registro
+{% endblock %}
 
-{% block clases_body %}dark:bg-slate-950{% endblock %}
+{% block clases_body %}dark:bg-slate-950
+{% endblock %}
 
 {% block body %}
 	<div class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 mx-auto mt-8 max-w-lg">
-		<h1 class="text-2xl font-bold mb-6 text-center text-slate-50">
+		<h1 class="text-2xl font-bold mb-6 text-center dark:text-slate-50">
 			<i class="fa-solid fa-user "></i>
 			Formulario de registro
 			<i class="fa-solid fa-user"></i>
 		</h1>
-			
+
 
 		{{ form_start(registrationForm) }}
 		<div class="mb-4">
-			{{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'block text-gray-700 text-slate-50 font-bold mb-2'}}) }}
+			{{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'block text-gray-700 dark:text-slate-50 font-bold mb-2'}}) }}
 			{{ form_widget(registrationForm.email, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Email'}}) }}
 		</div>
 
 		<div class="mb-4">
-			{{ form_label(registrationForm.nombre, 'Nombre', {'label_attr': {'class': 'block text-gray-700 text-slate-50 font-bold mb-2'}}) }}
+			{{ form_label(registrationForm.nombre, 'Nombre', {'label_attr': {'class': 'block text-gray-700 dark:text-slate-50 font-bold mb-2'}}) }}
 			{{ form_widget(registrationForm.nombre, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Nombre'}}) }}
 		</div>
 
 		<div class="mb-4">
-			{{ form_label(registrationForm.apellido, 'Apellido', {'label_attr': {'class': 'block text-gray-700 text-slate-50 font-bold mb-2'}}) }}
+			{{ form_label(registrationForm.apellido, 'Apellido', {'label_attr': {'class': 'block text-gray-700 dark:text-slate-50 font-bold mb-2'}}) }}
 			{{ form_widget(registrationForm.apellido, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Apellido'}}) }}
 		</div>
 
 		<div class="mb-4">
-			{{ form_label(registrationForm.plainPassword, 'Contraseña', {'label_attr': {'class': 'block text-gray-700 text-slate-50 font-bold mb-2'}}) }}
-			{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Contraseña'}}) }}
+			{{ form_label(registrationForm.plainPassword.first, 'Contraseña', {'label_attr': {'class': 'block text-gray-700 dark:text-slate-50 font-bold mb-2'}}) }}
+			{% if form_errors(registrationForm.plainPassword.first) %}
+				<span class="block text-red-500 font-light mb-2">
+					{{ form_errors(registrationForm.plainPassword.first) }}
+				</span>
+			{% endif %}
+			{{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Contraseña'}}) }}
+		</div>
+
+		<div class="mb-4">
+			{{ form_label(registrationForm.plainPassword.second, 'Repite la contraseña', {'label_attr': {'class': 'block text-gray-700 dark:text-slate-50 font-bold mb-2'}}) }}
+			{% if form_errors(registrationForm.plainPassword.first) %}
+				<span class="block text-red-500 font-light mb-2">
+					{{ form_errors(registrationForm.plainPassword.first) }}
+				</span>
+			{% endif %}
+			{{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Contraseña'}}) }}
 		</div>
 
 		<div class="text-center">
