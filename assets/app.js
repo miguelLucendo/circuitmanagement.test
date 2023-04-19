@@ -15,7 +15,6 @@ import './bootstrap';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // Dark mode toggle
-// darkModeToggle();
 
 
 const darkModeToggle = () => {
@@ -24,21 +23,17 @@ const darkModeToggle = () => {
   } else {
     document.documentElement.classList.remove('dark')
   }
-
-  const toggle = document.querySelector('#darkModeCheckbox');
-  toggle.addEventListener('change', () => {
-    if (toggle.checked) {
+  
+  const toggle = document.querySelector('#dark-mode-toggle');
+  toggle.addEventListener('click', () => {
+    if (localStorage.cmTheme === 'light') {
       document.documentElement.classList.add('dark')
       localStorage.cmTheme = 'dark';
     } else {
       document.documentElement.classList.remove('dark')
       localStorage.cmTheme = 'light';
     }
-});
-  // Whenever the user explicitly chooses light mode
-
-  // Whenever the user explicitly chooses dark mode
-  // localStorage.cmTtheme = 'dark'
-
-
+  });
 }
+
+darkModeToggle();
