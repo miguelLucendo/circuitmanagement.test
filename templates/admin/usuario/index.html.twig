@@ -1,0 +1,66 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Usuarios
+{% endblock %}
+
+{% block content %}
+	<div class="w-full overflow-hidden flex flex-col flex-wrap px-4 py-8 gap-12">
+		<h1 class="text-3xl font-semibold dark:text-white">Coches</h1>
+		<div class="w-full overflow-hidden rounded-lg border border-gray-200 shadow-lg">
+			<table class="w-full border-collapse bg-white text-left text-sm text-slate-600">
+				<thead class="bg-gray-50">
+					<tr>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">#</th>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">Email</th>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">Nombre</th>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">Apellido</th>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">Rol / Roles</th>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">Cartera</th>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">Acciones</th>
+					</tr>
+				</thead>
+				<tbody class="divide-y divide-gray-200 border-t border-gray-100">
+					{% for usuario in usuarios %}
+						<tr class="hover:bg-gray-100 duration-300">
+							<th class="px-4 py-4">
+								{{ usuario.id }}
+							</th>
+							<th class="px-4 py-4">
+								{{ usuario.email }}
+							</th>
+							<td class="px-4 py-4">
+								{{ usuario.nombre }}
+							</td>
+							<td class="px-4 py-4">
+								{{ usuario.apellido }}
+							</td>
+							<td class="px-4 py-4">
+								{{ (usuario.roles ? usuario.roles|json_encode : '') | replace({'["':'', '"]':'','"':'',',':' - '}) }}
+							</td>
+							<td class="px-4 py-4">
+								{{ usuario.cartera }}
+							</td>
+							<td class="px-4 py-4 flex gap-2">
+								<a href="{{ path('app_usuario_show', {'id': usuario.id}) }}" class="text-blue-500 hover:text-blue-700 mr-2">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</a>
+								<a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}" class="text-blue-500 hover:text-blue-700">
+									<i class="fa-solid fa-pen-to-square"></i>
+								</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6" class="px-4 py-4 text-center">
+								<i class="fa-solid fa-xmark"></i>
+								No se encontraron registros
+								<i class="fa-solid fa-xmark"></i>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<a href="{{ path('app_usuario_new') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-44 text-center duration-300">Insertar usuario</a>
+	</div>
+{% endblock %}
