@@ -25,6 +25,7 @@ class IncidenteController extends AbstractController
     public function new(Request $request, IncidenteRepository $incidenteRepository): Response
     {
         $incidente = new Incidente();
+        $incidente->setUsuario($this->getUser());
         $form = $this->createForm(IncidenteType::class, $incidente);
         $form->handleRequest($request);
 
