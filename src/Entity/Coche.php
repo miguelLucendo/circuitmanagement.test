@@ -150,4 +150,9 @@ class Coche
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->matricula . ' - ' . $this->marca . ' ' . $this->modelo;
+    }
 }
