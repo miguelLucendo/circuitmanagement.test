@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\IncidenteRepository;
+use App\Entity\CocheIncidente;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IncidenteRepository::class)]
@@ -21,6 +23,9 @@ class Incidente
 
     #[ORM\ManyToOne(inversedBy: 'incidentes')]
     private ?Usuario $usuario = null;
+
+    #[ORM\OneToMany(mappedBy: 'incidente', targetEntity: CocheIncidente::class)]
+    private Collection $coche_incidentes;
 
     public function getId(): ?int
     {
@@ -59,6 +64,32 @@ class Incidente
     public function setUsuario(?Usuario $usuario): self
     {
         $this->usuario = $usuario;
+
+        return $this;
+    }
+    public function getCocheIncidentes(): Collection
+    {
+        return $this->coche_incidentes;
+    }
+
+    public function addCocheIncidentes(CocheIncidente $coche_incidente): self
+    {
+        if (!$this->coche_incidentes->contains($coche_incidente)) {
+            $this->coche_incidentes->add($coche_incidente);
+            $coche_incidente->setIncidente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCocheIncidentes(CocheIncidente $coche_incidente): self
+    {
+        if ($this->coche_incidentes->removeElement($coche_incidente)) {
+            // set the owning side to null (unless already changed)
+            if ($coche_incidente->getIncidente() === $this) {
+                $coche_incidente->setIncidente(null);
+            }
+        }
 
         return $this;
     }
