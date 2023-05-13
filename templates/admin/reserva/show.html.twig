@@ -1,0 +1,60 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Reserva
+{% endblock %}
+
+{% block content %}
+	<div class="w-full overflow-hidden flex flex-col flex-wrap px-4 py-8 gap-12">
+		<h1 class="text-3xl font-semibold dark:text-white">Ver reserva</h1>
+		<div class="w-full overflow-hidden rounded-lg border border-gray-200 shadow-lg bg-gray-50 px-4 py-8 flex flex-col">
+			<div class="flex justify-between gap-4">
+				<a href="{{ path('app_reserva_edit', {'id': reserva.id}) }}" class="text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500 font-bold py-2 px-4 rounded w-24 text-center duration-300">Editar</a>
+				{{ include('admin/reserva/_delete_form.html.twig') }}
+			</div>
+			<div class="flex flex-col gap-2 p-4">
+				<p>Fecha</p>
+				<p class="rounded border border-gray-300 p-2">{{ reserva.fecha ? reserva.fecha|date('d-m-Y') : '' }}</p>
+			</div>
+			<div class="flex flex-col gap-2 p-4">
+				<p>Hora inicio</p>
+				<p class="rounded border border-gray-300 p-2">{{ reserva.horaInicio }}</p>
+			</div>
+			<div class="flex flex-col gap-2 p-4">
+				<p>Coche</p>
+				<p class="rounded border border-gray-300 p-2">{{ reserva.coche }}</p>
+			</div>
+			<div class="flex flex-col gap-2 p-4">
+				<p>Usuario</p>
+				<p class="rounded border border-gray-300 p-2">{{ reserva.usuario }}</p>
+			</div>
+			<a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-44 text-center duration-300" href="{{ path('app_reserva_index') }}">Volver a la lista</a>
+		</div>
+	{% endblock %}
+
+
+	{# {% block body %}
+							<h1>Reserva</h1>
+					
+							<table class="table">
+								<tbody>
+									<tr>
+										<th>Id</th>
+										<td>{{ reserva.id }}</td>
+									</tr>
+									<tr>
+										<th>Fecha</th>
+										<td>{{ reserva.fecha ? reserva.fecha|date('Y-m-d') : '' }}</td>
+									</tr>
+									<tr>
+										<th>Hora_inicio</th>
+										<td>{{ reserva.horaInicio }}</td>
+									</tr>
+								</tbody>
+							</table>
+					
+							<a href="{{ path('app_reserva_index') }}">back to list</a>
+					
+							<a href="{{ path('app_reserva_edit', {'id': reserva.id}) }}">edit</a>
+					
+							{{ include('reserva/_delete_form.html.twig') }}
+						{% endblock %} #}
