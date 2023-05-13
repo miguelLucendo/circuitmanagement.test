@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_reserva_delete', {'id': reserva.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reserva.id) }}">
+	<button class="btn  hover:bg-red-500 hover:text-white border border-red-500 text-red-500 font-bold py-2 px-4 rounded w-24 text-center duration-300">Borrar</button>
+</form>
