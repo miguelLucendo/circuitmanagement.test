@@ -22,9 +22,8 @@
 			<div class="flex flex-col gap-2 p-4">
 				<p>Coche/s involucrado/s</p>
 				<p class="rounded border border-gray-300 p-2">
-
 					{% for cocheIncidente in cochesIncidentesRelacionados %}
-						{{ cocheIncidente.coche }}
+						{{ cocheIncidente.coche }}<br>
 					{% endfor %}
 				</p>
 			</div>
