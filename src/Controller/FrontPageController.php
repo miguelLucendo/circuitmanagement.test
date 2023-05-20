@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FrontPageController extends AbstractController
 {
-   #[Route('/', name: 'front_page')]
+    #[Route('/', name: 'front_page')]
     public function frontPage(): Response
     {
         // this looks exactly the same

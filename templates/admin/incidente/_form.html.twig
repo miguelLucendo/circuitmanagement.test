@@ -1,4 +1,21 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="w-full overflow-hidden rounded-lg border border-gray-200 shadow-lg bg-gray-50 px-4 py-8 flex flex-col">
+	{{ form_start(form) }}
+	<div class="flex flex-col gap-2 p-4">
+		{{ form_label(form.descripcion, 'Descripcion') }}
+		{{ form_widget(form.descripcion, {'attr': {'class': 'rounded border border-gray-300 p-2'}}) }}
+	</div>
+	<div class="flex flex-col gap-2 p-4">
+		{{ form_label(form.tipo_incidente, 'Tipo de incidente') }}
+		{{ form_widget(form.tipo_incidente, {'attr': {'class': 'rounded border border-gray-300 p-2'}}) }}
+	</div>
+	<div class="flex flex-col gap-2 p-4">
+		{{ form_label(form.coches, 'Coches involucrados') }}
+		{{ form_widget(form.coches, {'attr': {'class': 'rounded border border-gray-300 p-2'}}) }}
+	</div>
+	<div class="flex flex-col gap-2 p-4">
+		{{ form_label(form.usuario, 'Registrado por') }}
+		{{ form_widget(form.usuario, {'attr': {'class': 'rounded border border-gray-300 p-2'}}) }}
+	</div>
+	<button class="btn ml-4 mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-36 text-center duration-300">{{ button_label|default('Guardar') }}</button>
+	{{ form_end(form) }}
+</div>
