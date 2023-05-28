@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+
 #[Route('/admin/coche')]
 class CocheController extends AbstractController
 {
@@ -69,8 +71,12 @@ class CocheController extends AbstractController
     #[Route('/{id}', name: 'app_coche_delete', methods: ['POST'])]
     public function delete(Request $request, Coche $coche, CocheRepository $cocheRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$coche->getId(), $request->request->get('_token'))) {
-            $cocheRepository->remove($coche, true);
+        if ($this->isCsrfTokenValid('delete' . $coche->getId(), $request->request->get('_token'))) {
+            try {
+                $cocheRepository->remove($coche, true);
+            } catch (ForeignKeyConstraintViolationException $e) {
+                $this->addFlash('error', 'No se puede eliminar el coche porque tiene incidentes asociados');
+            }
         }
 
         return $this->redirectToRoute('app_coche_index', [], Response::HTTP_SEE_OTHER);

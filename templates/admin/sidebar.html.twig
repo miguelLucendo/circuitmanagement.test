@@ -21,6 +21,10 @@
 			<i class="fa-solid fa-car mr-3 fa-2x dark:text-white"></i>
 			<span class="font-medium hidden md:block dark:text-white">Coches</span>
 		</a>
+		<a href="{{url('app_incidente_index')}}" class="flex items-center justify-center md:justify-start px-6 py-2 mt-2 text-gray-700 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-slate-900 {{ app.request.uri != url('app_incidente_index') ?: 'border-l-4 border-indigo-500 bg-gray-100 dark:bg-slate-900' }}">
+			<i class="fa-solid fa-car-burst mr-3 fa-2x dark:text-white"></i>
+			<span class="font-medium hidden md:block dark:text-white">Incidentes</span>
+		</a>
 		<a href="{{url('app_tipo_incidente_index')}}" class="flex items-center justify-center md:justify-start px-6 py-2 mt-2 text-gray-700 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-slate-900 {{ app.request.uri != url('app_tipo_incidente_index') ?: 'border-l-4 border-indigo-500 bg-gray-100 dark:bg-slate-900' }}">
 			<i class="fa-solid fa-flag mr-3 fa-2x dark:text-white"></i>
 			<span class="font-medium hidden md:block dark:text-white">Tipos de incidentes</span>

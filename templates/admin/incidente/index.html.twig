@@ -1,0 +1,74 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Incidentes
+{% endblock %}
+
+{% block content %}
+	<div class="w-full overflow-hidden flex flex-col flex-wrap px-4 py-8 gap-12">
+		<h1 class="text-3xl font-semibold dark:text-white">Incidentes</h1>
+		{# {% for coches in app.flashes('test') %} #}
+		{# <div #}
+		{# class="w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg p-4"> #}
+		{# <p class="text-2xl text-center text-red-500">{{ dump(coches) }}</p> #}
+		{# {% for coche in coches  %} #}
+		{# <p class="text-2xl text-center text-red-500">{{ dump(coche) }}</p> #}
+		{# {% endfor %} #}
+		{# </div> #}
+		{# {% endfor %} #}
+			{% for coches in app.flashes('test') %}
+				<div class="w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg p-4"> {% for coche in coches  %}
+					<p class="text-2xl text-center text-red-500">{{ dump(coche) }}</p>
+				{% endfor %}
+			</div>
+		{% endfor %}
+
+		<div class="w-full overflow-hidden rounded-lg border border-gray-200 shadow-lg">
+			<table class="w-full border-collapse bg-white text-left text-sm text-slate-600">
+				<thead class="bg-gray-50">
+					<tr>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">#</th>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">Tipo incidente</th>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">Descripcion</th>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">Registrado por</th>
+						<th scope="col" class="px-4 py-4 font-semibold text-slate-800">Acciones</th>
+					</tr>
+				</thead>
+				<tbody class="divide-y divide-gray-200 border-t border-gray-100">
+					{% for incidente in incidentes %}
+						<tr class="hover:bg-gray-100 duration-300">
+							<th class="px-4 py-4">
+								{{ incidente.id }}
+							</th>
+							<th class="px-4 py-4">
+								{{ incidente.tipoIncidente }}
+							</th>
+							<td class="px-4 py-4">
+								{{ incidente.descripcion }}
+							</td>
+							<td class="px-4 py-4">
+								{{ incidente.usuario }}
+							</td>
+							<td class="px-4 py-4 flex gap-2">
+								<a href="{{ path('app_incidente_show', {'id': incidente.id}) }}" class="text-blue-500 hover:text-blue-700 mr-2">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</a>
+								<a href="{{ path('app_incidente_edit', {'id': incidente.id}) }}" class="text-blue-500 hover:text-blue-700">
+									<i class="fa-solid fa-pen-to-square"></i>
+								</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6" class="px-4 py-4 text-center">
+								<i class="fa-solid fa-xmark"></i>
+								No se encontraron registros
+								<i class="fa-solid fa-xmark"></i>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<a href="{{ path('app_incidente_new') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-44 text-center duration-300">Insertar incidente</a>
+	</div>
+{% endblock %}
