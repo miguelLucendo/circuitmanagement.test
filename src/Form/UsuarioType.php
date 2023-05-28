@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Usuario;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,8 +16,15 @@ class UsuarioType extends AbstractType
             ->add('email')
             ->add('nombre')
             ->add('apellido')
-            ->add('cartera')
-        ;
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Administrador' => 'ROLE_ADMIN',
+                ],
+                'multiple' => true,
+                'label' => 'Roles',
+                'required' => false,
+            ])
+            ->add('cartera');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
