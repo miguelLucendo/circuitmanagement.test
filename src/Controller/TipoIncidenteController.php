@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+
 #[Route('/admin/tipo_incidente')]
 class TipoIncidenteController extends AbstractController
 {
@@ -70,9 +72,12 @@ class TipoIncidenteController extends AbstractController
     public function delete(Request $request, TipoIncidente $tipoIncidente, TipoIncidenteRepository $tipoIncidenteRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $tipoIncidente->getId(), $request->request->get('_token'))) {
-            $tipoIncidenteRepository->remove($tipoIncidente, true);
+            try {
+                $tipoIncidenteRepository->remove($tipoIncidente, true);
+            } catch (ForeignKeyConstraintViolationException $ex) {
+                $this->addFlash('error', 'No se puede eliminar el tipo de incidente porque tiene incidentes asociados');
+            }
         }
-
         return $this->redirectToRoute('app_tipo_incidente_index', [], Response::HTTP_SEE_OTHER);
     }
 }

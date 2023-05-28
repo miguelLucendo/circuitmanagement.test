@@ -68,13 +68,34 @@ class IncidenteController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_incidente_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Incidente $incidente, IncidenteRepository $incidenteRepository): Response
+    public function edit(Request $request, Incidente $incidente, IncidenteRepository $incidenteRepository, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(IncidenteType::class, $incidente);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $incidenteRepository->save($incidente, true);
+
+            $cocheIncidenteRepository = $em->getRepository(CocheIncidente::class);
+            $coches = $form->get('coches')->getData();
+
+            $cocheIncidenteRepository->updateCars($incidente, $coches, true);
+
+            // foreach ($coches as $coche) {
+            //     if ($cocheIncidenteRepository->existsCar($coche, $incidente)) {
+
+            //     } else {
+            //         $cocheIncidente = new CocheIncidente();
+
+            //         $cocheIncidente->setIncidente($incidente);
+            //         $cocheIncidente->setCoche($coche);
+            //         $cocheIncidente->setDescripcion('');
+
+            //         $cocheIncidenteRepository->save($cocheIncidente, true);
+            //     }
+            // }
+
+            // $this->addFlash('test', $coches);
 
             return $this->redirectToRoute('app_incidente_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -86,9 +107,16 @@ class IncidenteController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_incidente_delete', methods: ['POST'])]
-    public function delete(Request $request, Incidente $incidente, IncidenteRepository $incidenteRepository): Response
+    public function delete(Request $request, Incidente $incidente, IncidenteRepository $incidenteRepository, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete' . $incidente->getId(), $request->request->get('_token'))) {
+
+            $cocheIncidenteRepository = $em->getRepository(CocheIncidente::class);
+            $cochesRelacionados = $cocheIncidenteRepository->findCarsByIncident($incidente);
+
+            foreach ($cochesRelacionados as $cocheRelacionado) {
+                $cocheIncidenteRepository->remove($cocheRelacionado, true);
+            }
             $incidenteRepository->remove($incidente, true);
         }
 

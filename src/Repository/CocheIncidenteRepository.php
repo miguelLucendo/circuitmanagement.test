@@ -4,8 +4,11 @@ namespace App\Repository;
 
 use App\Entity\CocheIncidente;
 use App\Entity\Incidente;
+use App\Entity\Coche;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @extends ServiceEntityRepository<CocheIncidente>
@@ -47,6 +50,32 @@ class CocheIncidenteRepository extends ServiceEntityRepository
             ->setParameter('incidente', $i);
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function existsCar(Coche $c, Incidente $i)
+    {
+        $qb = $this->createQueryBuilder('ci');
+        $qb->where('ci.coche = :coche')
+            ->andWhere('ci.incidente = :incidente')
+            ->setParameter('coche', $c)
+            ->setParameter('incidente', $i);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function updateCars(Incidente $i, ArrayCollection $cars, bool $flush = false): void
+    {
+        $carsRelateds = $this->findCarsByIncident($i);
+        foreach ($carsRelateds as $carRelated) {
+            $this->remove($carRelated, $flush);
+        }
+        foreach ($cars as $car) {
+            $ci = new CocheIncidente();
+            $ci->setIncidente($i);
+            $ci->setCoche($car);
+            $ci->setDescripcion('');
+            $this->save($ci, $flush);
+        }
     }
 
     //    /**

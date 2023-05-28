@@ -5,10 +5,13 @@ namespace App\Controller;
 use App\Entity\Usuario;
 use App\Form\UsuarioType;
 use App\Repository\UsuarioRepository;
+use Doctrine\DBAL\Schema\ForeignKeyConstraint;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 #[Route('/admin/usuario')]
 class UsuarioController extends AbstractController
@@ -69,8 +72,12 @@ class UsuarioController extends AbstractController
     #[Route('/{id}', name: 'app_usuario_delete', methods: ['POST'])]
     public function delete(Request $request, Usuario $usuario, UsuarioRepository $usuarioRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$usuario->getId(), $request->request->get('_token'))) {
-            $usuarioRepository->remove($usuario, true);
+        if ($this->isCsrfTokenValid('delete' . $usuario->getId(), $request->request->get('_token'))) {
+            try {
+                $usuarioRepository->remove($usuario, true);
+            } catch (ForeignKeyConstraintViolationException $e) {
+                $this->addFlash('error', 'No se puede eliminar el usuario porque tiene coches asociados');
+            }
         }
 
         return $this->redirectToRoute('app_usuario_index', [], Response::HTTP_SEE_OTHER);

@@ -23,6 +23,7 @@ class IncidenteType extends AbstractType
                 'class' => Coche::class,
                 'choice_label' => 'matricula',
                 'multiple' => true,
+                'required' => false,
                 'mapped' => false,
             ])
             ->add('usuario');
