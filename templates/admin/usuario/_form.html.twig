@@ -13,6 +13,25 @@
 		{{ form_widget(form.apellido, {'attr': {'class': 'rounded border border-gray-300 p-2'}}) }}
 	</div>
 	<div class="flex flex-col gap-2 p-4">
+		{{ form_label(form.plainPassword.first, 'Contraseña') }}
+		{% if form_errors(form.plainPassword.first) %}
+			<span class="block text-red-500 font-light mb-2">
+				{{ form_errors(form.plainPassword.first) }}
+			</span>
+		{% endif %}
+		{{ form_widget(form.plainPassword.first, {'attr': {'class': 'rounded border border-gray-300 p-2'}}) }}
+	</div>
+
+	<div class="flex flex-col gap-2 p-4">
+		{{ form_label(form.plainPassword.second, 'Repite la contraseña') }}
+		{% if form_errors(form.plainPassword.first) %}
+			<span class="block text-red-500 font-light mb-2">
+				{{ form_errors(form.plainPassword.first) }}
+			</span>
+		{% endif %}
+		{{ form_widget(form.plainPassword.second, {'attr': {'class': 'rounded border border-gray-300 p-2'}}) }}
+	</div>
+	<div class="flex flex-col gap-2 p-4">
 		{{ form_label(form.apellido, 'Roles') }}
 		{{ form_widget(form.roles, {'attr': {'class': 'rounded border border-gray-300 p-2'}}) }}
 	</div>

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/admin/usuario')]
 class UsuarioController extends AbstractController
@@ -25,13 +26,20 @@ class UsuarioController extends AbstractController
     }
 
     #[Route('/new', name: 'app_usuario_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UsuarioRepository $usuarioRepository): Response
+    public function new(Request $request, UsuarioRepository $usuarioRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $usuario = new Usuario();
         $form = $this->createForm(UsuarioType::class, $usuario);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $usuario->setPassword(
+                $passwordHasher->hashPassword(
+                    $usuario,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
             $usuarioRepository->save($usuario, true);
 
             return $this->redirectToRoute('app_usuario_index', [], Response::HTTP_SEE_OTHER);
